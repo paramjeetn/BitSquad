@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'
 
 const Sidebar = ({ userDetails, complaintsCount }: { userDetails: any, complaintsCount: number }) => {
   return (
@@ -7,11 +8,14 @@ const Sidebar = ({ userDetails, complaintsCount }: { userDetails: any, complaint
         <>
           <div className="w-24 h-24 bg-gray-300 rounded-full mb-4 overflow-hidden">
             {/* Profile Image */}
-            <img
-              src={userDetails.profileImage}
-              alt="Profile"
-              className="rounded-full object-cover w-full h-full"
-            />
+                <Image
+                src={userDetails.profileImage}
+                alt="Profile"
+                width={100}  // Width as a numerical value (in pixels)
+                height={100} // Set height to match
+                className="rounded-full object-cover w-full h-full"
+              />
+
           </div>
           <div className="text-center mb-4">
             <p className="font-semibold text-lg">{userDetails.name}</p>

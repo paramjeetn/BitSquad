@@ -8,7 +8,7 @@ export default function Home() {
   useEffect(() => {
     // Redirect to /home when the component mounts
     router.push('/home');
-  }, []);
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
