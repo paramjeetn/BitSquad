@@ -13,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isAdminLogin, setIsAdminLogin] = useState(false); // Toggle between admin and user login
   const [error, setError] = useState<string | null>(null);
+  const [isEmailFocused, setIsEmailFocused] = useState(false); // Track if email field is focused
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Track if password field is focused
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -52,6 +54,10 @@ const Login = () => {
     }
   };
 
+  // Default email and password based on login type
+  const defaultEmail = isAdminLogin ? "user@example.com" : "demoparam@gmail.com";
+  const defaultPassword = isAdminLogin ? "Paramjeet.23" : "Paramjeet.826";
+
   return (
     <form onSubmit={handleLogin} className="space-y-4">
       <div className="flex justify-between">
@@ -65,8 +71,15 @@ const Login = () => {
         <label className="block text-sm font-medium text-gray-700">Email</label>
         <Input
           type="email"
-          value={email}
+          value={email || (isEmailFocused ? defaultEmail : "")}
+          onFocus={() => {
+            if (!isEmailFocused) {
+              setEmail(defaultEmail);
+              setIsEmailFocused(true);
+            }
+          }}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder={defaultEmail}
           required
           className="text-gray-900"
         />
@@ -76,8 +89,15 @@ const Login = () => {
         <label className="block text-sm font-medium text-gray-700">Password</label>
         <Input
           type="password"
-          value={password}
+          value={password || (isPasswordFocused ? defaultPassword : "")}
+          onFocus={() => {
+            if (!isPasswordFocused) {
+              setPassword(defaultPassword);
+              setIsPasswordFocused(true);
+            }
+          }}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder={defaultPassword}
           required
           className="text-gray-900"
         />
